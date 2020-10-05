@@ -1,23 +1,23 @@
 package studentsrestproj.demo.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "students")
 public class Student {
 
     @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "name")
+    @NotBlank(message = "Name is mandatory")
     private String name;
 
-    @Column(name = "email")
+    @Email(message = "Email should be valid")
     private String email;
 
-    @Column(name = "phone")
     private String phone;
 
 

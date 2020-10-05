@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8" />
     <title th:text="'Create a student'" />
@@ -8,28 +8,34 @@
 
 </head>
 <body>
-<form action="#" th:action="@{/addstudent}" th:object="${student}" method="post">
-    <p>
+
+    <h2>Update student</h2>
+
+    <form action="#"
+          th:action="@{/update/{id}(id=${student.id})}"
+          th:object="${student}"
+          method="post">
+        <p>
         <label for="name">Name</label>
         <input type="text" th:field="*{name}" id="name" placeholder="Name">
         <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
-    </p>
+        </p>
 
-    <p>
+        <p>
         <label for="name">Phone</label>
         <input type="text" th:field="*{phone}" id="phone" placeholder="Phone">
         <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
-    </p>
+        </p>
 
-    <p>
+        <p>
         <label for="email">Email</label>
         <input type="text" th:field="*{email}" id="email" placeholder="Email">
         <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-    </p>
+        </p>
 
-    <p>
-        <input class="button" type="submit" value="Add student">
-    </p>
-</form>
+        <p>
+        <input class="button" type="submit" value="Update student">
+        </p>
+    </form>
 </body>
 </html>

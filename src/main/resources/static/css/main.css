@@ -1,0 +1,55 @@
+h2 {
+    font-family: sans-serif;
+    font-size: 1.5em;
+    text-transform: uppercase;
+}
+
+p {
+    font-family: sans-serif;
+}
+
+
+table {
+    font-family: "Lucida Sans Unicode", Sans-Serif;
+    font-size: 14px;
+
+    /*border-radius: 10px;*/
+    border-spacing: 0;
+    text-align: center;
+}
+th {
+    font-weight: normal;
+    background: #ffab91;
+    color: black;
+}
+
+th, td {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
+}
+
+.button {
+    padding: 10px 24px;
+    background-color: #ffccbc;
+    color: black;
+    border: 2px solid #ffccbc;
+    transition-duration: 0.4s;
+}
+.button:hover {
+    background-color: white;
+}
+
+
+.addBut:link, .addBut:visited {
+    background-color: #ffccbc;
+    border: 2px solid #ffccbc;
+    color: black;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.addBut:hover, .addBut:active {
+    background-color: white;
+}

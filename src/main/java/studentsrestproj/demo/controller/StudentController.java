@@ -5,10 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import studentsrestproj.demo.model.Student;
 import studentsrestproj.demo.service.StudentService;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class StudentController {
@@ -20,68 +22,72 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+
+    //CREATE
     @GetMapping("/signup")
-    public String showSignUpForm(Student student) {
+    public String showAddForm(Student student, Model model) {
+        model.addAttribute("student", student);
         return "add-student";
     }
 
     @PostMapping("/addstudent")
-    public String addUser(Student student, BindingResult result, Model model) {
+    public String addStudent(@Valid Student student, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "add-student";
         }
 
         studentService.create(student);
         model.addAttribute("students", studentService.readAll());
-        return "redirect:/index";
+        return "redirect:/students";
     }
 
+    //UPDATE
+    @GetMapping("/edit/{id}")
+    public String showUpdateForm(@PathVariable("id") int id, Model model) {
+        Student student = studentService.read(id);
+        model.addAttribute("student", student);
+        return "update-student";
+    }
 
+    @PostMapping("/update/{id}")
+    public String updateStudent(@PathVariable("id") int id, @Valid Student student,
+                             BindingResult result, Model model) {
+        if (result.hasErrors()) {
+//            student.setId(id);
+            return "update-student";
+        }
 
-//    @PostMapping(value = "/students")
-//    public ResponseEntity<?> create(@RequestBody Student student) {
-//        studentService.create(student);
-//        return new ResponseEntity<>(HttpStatus.CREATED);
-//    }
+        studentService.update(student, id);
+        model.addAttribute("students", studentService.readAll());
+        return "redirect:/students";
+    }
 
-//    @GetMapping(value = "/students/list")
-//    public ResponseEntity<List<Student>> read() {
-//        final List<Student> students = studentService.readAll();
-//
-//        return students != null &&  !students.isEmpty()
-//                ? new ResponseEntity<>(students, HttpStatus.OK)
-//                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//    }
-//
-//    @GetMapping(value = "/students/{id}")
-//    public ResponseEntity<Student> read(@PathVariable(name = "id") int id, Model model) {
-//        final Student student = studentService.read(id);
-//        model.addAttribute("id", id);
-//
-//        return student != null
-//                ? new ResponseEntity<>(student, HttpStatus.OK)
-//                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//    }
+    //DELETE
+    @GetMapping("/delete/{id}")
+    public String deleteStudent(@PathVariable("id") int id, Model model) {
+        Student student = studentService.read(id);
+        studentService.delete(student.getId());
 
+        model.addAttribute("students", studentService.readAll());
+        return "redirect:/students";
+    }
 
+    //READ
+    @GetMapping("/students")
+    public String readAllStudents(Model model) {
+        List<Student> list = studentService.readAll();
 
+        model.addAttribute("students", list);
 
+        return "studentsPage";
+    }
 
-//    @PutMapping(value = "/students/{id}")
-//    public ResponseEntity<?> update(@PathVariable(name = "id") int id, @RequestBody Student student) {
-//        studentService.update(student, id);
-//
-//        return updated
-//                ? new ResponseEntity<>(HttpStatus.OK)
-//                : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
-//    }
-//
-//    @DeleteMapping(value = "/students/{id}")
-//    public ResponseEntity<?> delete(@PathVariable(name = "id") int id) {
-//        final boolean deleted = studentService.delete(id);
-//
-//        return deleted
-//                ? new ResponseEntity<>(HttpStatus.OK)
-//                : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
-//    }
+    @GetMapping("/student/{id}")
+    public String read(@PathVariable(name = "id") int id, Model model) {
+        final Student student = studentService.read(id);
+        model.addAttribute("student", student);
+
+        return "oneStudentPage";
+    }
+
 }

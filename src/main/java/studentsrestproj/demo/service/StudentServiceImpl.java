@@ -2,8 +2,6 @@ package studentsrestproj.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import studentsrestproj.demo.dao.StudentDAO;
-import studentsrestproj.demo.dao.StudentDAOImpl;
 import studentsrestproj.demo.model.Student;
 import studentsrestproj.demo.repository.StudentRepository;
 
@@ -27,8 +25,8 @@ public class StudentServiceImpl implements StudentService {
 //    }
 
     @Override
-    public void create(Student student) {
-        studentRepository.save(student);
+    public Student create(Student student) {
+        return studentRepository.save(student);
     }
 
     @Override
