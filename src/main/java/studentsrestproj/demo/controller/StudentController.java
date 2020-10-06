@@ -2,17 +2,18 @@ package studentsrestproj.demo.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import studentsrestproj.demo.model.Student;
 import studentsrestproj.demo.service.StudentService;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@Controller
+//@Controller
 public class StudentController {
 
     private final StudentService studentService;
@@ -89,5 +90,17 @@ public class StudentController {
 
         return "oneStudentPage";
     }
+
+//    @GetMapping("/marks")
+//    public ResponseEntity<List<Marks>> readAllMarks() {
+//        List<Student> list = studentService.readAll();
+//        List<Marks> marks = new ArrayList<>();
+//        for (Student student: list) {
+//            marks.addAll(student.getMarks());
+//        }
+//        return marks != null &&  !marks.isEmpty()
+//                ? new ResponseEntity<>(marks, HttpStatus.OK)
+//                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//    }
 
 }

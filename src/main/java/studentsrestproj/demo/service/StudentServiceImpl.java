@@ -2,6 +2,7 @@ package studentsrestproj.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import studentsrestproj.demo.model.Marks;
 import studentsrestproj.demo.model.Student;
 import studentsrestproj.demo.repository.StudentRepository;
 
@@ -11,6 +12,10 @@ import java.util.List;
 public class StudentServiceImpl implements StudentService {
 
 //    private final StudentDAO studentDAO;
+//    @Autowired
+//    public StudentServiceImpl(StudentDAO studentDAO) {
+//        this.studentDAO = studentDAO;
+//    }
 
     private final StudentRepository studentRepository;
 
@@ -19,10 +24,7 @@ public class StudentServiceImpl implements StudentService {
         this.studentRepository = studentRepository;
     }
 
-//    @Autowired
-//    public StudentServiceImpl(StudentDAO studentDAO) {
-//        this.studentDAO = studentDAO;
-//    }
+
 
     @Override
     public Student create(Student student) {
@@ -53,4 +55,5 @@ public class StudentServiceImpl implements StudentService {
             studentRepository.deleteById(id);
         }
     }
+
 }
