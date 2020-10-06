@@ -10,4 +10,7 @@ public interface StudentService {
     Student read(int id);
     void update(Student student, int id);
     void delete(int id);
+    Double getAvgMark(int id);
+    List<Double> getAvgMarkForAll();
+    List<Student> getStudentsWithMark(double m1, double m2);
 }

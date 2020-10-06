@@ -1,12 +1,17 @@
 package studentsrestproj.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "students")
-public class Student {
+public class Student implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +24,10 @@ public class Student {
     private String email;
 
     private String phone;
+
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    private List<Marks> marks = new ArrayList<>();
 
 
     public Integer getId() {
@@ -52,4 +61,14 @@ public class Student {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public List<Marks> getMarks() {
+        return new ArrayList<>(marks);
+    }
+
+    public void setMarks(List<Marks> marks) {
+        this.marks = marks;
+    }
+
+
 }
