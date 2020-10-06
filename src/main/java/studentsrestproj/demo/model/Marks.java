@@ -4,8 +4,6 @@ package studentsrestproj.demo.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 
 @Entity
