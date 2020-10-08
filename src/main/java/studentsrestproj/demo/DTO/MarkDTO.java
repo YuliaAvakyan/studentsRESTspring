@@ -1,29 +1,13 @@
-package studentsrestproj.demo.model;
+package studentsrestproj.demo.DTO;
 
+import studentsrestproj.demo.model.Student;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
+public class MarkDTO {
 
-import javax.persistence.*;
-import java.io.Serializable;
-
-@Entity
-@Table(name = "marks")
-public class Marks{
-
-    @JsonIgnore
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String subject;
     private Integer mark;
-
-    @JsonIgnore
-//    @JsonView
-    @ManyToOne
-    @JoinColumn(name = "student_id")
-    private Student student;
+    private StudentDTO student;
 
     public Integer getId() {
         return id;
@@ -50,11 +34,11 @@ public class Marks{
     }
 
 
-    public Student getStudent() {
+    public StudentDTO getStudent() {
         return student;
     }
 
-    public void setStudent(Student student) {
+    public void setStudent(StudentDTO student) {
         this.student = student;
     }
 }

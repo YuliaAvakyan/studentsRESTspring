@@ -6,8 +6,7 @@ import studentsrestproj.demo.model.Marks;
 import studentsrestproj.demo.model.Student;
 import studentsrestproj.demo.repository.StudentRepository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -31,28 +30,41 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student read(int id) {
+    public Student read(Long id) {
         return studentRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid student Id:" + id));
     }
 
     @Override
-    public void update(Student student, int id) {
-        if (studentRepository.existsById(id)) {
-            student.setId(id);
-            studentRepository.save(student);
-        }
+    public Student update(Student newStudent, Long id) {
+//        if (studentRepository.existsById(id)) {
+//            student.setId(id);
+//            studentRepository.save(student);
+//        }
+
+        return studentRepository.findById(id)
+                .map(student -> {
+                    student.setName(newStudent.getName());
+                    student.setPhone(newStudent.getPhone());
+                    student.setEmail(newStudent.getEmail());
+                    student.setMarks(newStudent.getMarks());
+                    return studentRepository.save(student);
+                })
+                .orElseGet(() -> {
+                    newStudent.setId(id);
+                    return studentRepository.save(newStudent);
+                });
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Long id) {
         if (studentRepository.existsById(id)) {
             studentRepository.deleteById(id);
         }
     }
 
     @Override
-    public Double getAvgMark(int id){
+    public Double getAvgMark(Long id){
         Student student = read(id);
         List<Integer> allMark = new ArrayList<>();
         for (Marks mark: student.getMarks()) {
@@ -83,5 +95,13 @@ public class StudentServiceImpl implements StudentService {
         return studentList;
     }
 
+    @Override
+    public List<Object[]> getMarksCount(){
+        return (studentRepository.getCountMarks());
+    }
 
+    @Override
+    public Object getSumMark() {
+        return studentRepository.getSumMark();
+    }
 }

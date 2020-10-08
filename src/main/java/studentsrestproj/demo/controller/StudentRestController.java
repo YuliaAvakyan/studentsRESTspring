@@ -3,15 +3,15 @@ package studentsrestproj.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import studentsrestproj.demo.model.Student;
 import studentsrestproj.demo.service.StudentService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
+@RequestMapping("api/v1/students")
 public class StudentRestController {
 
     private final StudentService studentService;
@@ -22,35 +22,64 @@ public class StudentRestController {
     }
 
 
-    @GetMapping(value = "/")
+    @PostMapping("/create")
+    public ResponseEntity<Student> addStudent(@RequestBody Student student) {
+        return ResponseEntity.ok(studentService.create(student));
+    }
+
+    @GetMapping
     public ResponseEntity<List<Student>> read() {
         final List<Student> students = studentService.readAll();
-
-        return new ResponseEntity<>(students, HttpStatus.OK);
+        return ResponseEntity.ok(students);
     }
 
-    @GetMapping(value = "/st/{id}")
-    public ResponseEntity<Student> read(@PathVariable(name = "id") int id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Student> read(@PathVariable(name = "id") Long id) {
         final Student student = studentService.read(id);
-
-        return new ResponseEntity<>(student, HttpStatus.OK);
+        return ResponseEntity.ok(student);
     }
 
-    @GetMapping(value = "/avg/{id}")
-    public ResponseEntity<Double> averageMark(@PathVariable(name = "id") int id) {
-
-        return new ResponseEntity<>(studentService.getAvgMark(id), HttpStatus.OK);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Student> updateStudent(@RequestBody Student newStudent, @PathVariable Long id) {
+        return ResponseEntity.ok(studentService.update(newStudent, id));
     }
 
-    @GetMapping(value = "/avg")
+    @DeleteMapping("/delete/{id}")
+    public void deleteEmployee(@PathVariable Long id) {
+        studentService.delete(id);
+    }
+
+
+    @GetMapping("/avg/{id}")
+    public ResponseEntity<Double> averageMark(@PathVariable("id") Long id) {
+
+        return ResponseEntity.ok(studentService.getAvgMark(id));
+    }
+
+    @GetMapping("/allAvg")
     public ResponseEntity<List<Double>> averageMarkAll() {
-        return new ResponseEntity<>(studentService.getAvgMarkForAll(), HttpStatus.OK);
+        return ResponseEntity.ok(studentService.getAvgMarkForAll());
     }
 
-    @GetMapping(value = "/avg/{m1}/{m2}")
-    public ResponseEntity<List<Student>> studentWithMark(@PathVariable(name = "m1") double m1,
-                                                        @PathVariable(name = "m2") double m2) {
 
-        return new ResponseEntity<>(studentService.getStudentsWithMark(m1, m2), HttpStatus.OK);
+    @RequestMapping("/avg")
+    public ResponseEntity<List<Student>> studentWithMark(@RequestParam("min") double min,
+                                                         @RequestParam("max") double max) {
+        return ResponseEntity.ok(studentService.getStudentsWithMark(min, max));
     }
+
+
+
+    @GetMapping("/countMarks")
+    public ResponseEntity<List<Object[]>> getMarksCount() {
+        return ResponseEntity.ok(studentService.getMarksCount());
+    }
+
+    @GetMapping("/sumMarks")
+    public ResponseEntity<Object> getSum() {
+        return ResponseEntity.ok(studentService.getSumMark());
+    }
+
+
+
 }

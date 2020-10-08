@@ -1,34 +1,15 @@
-package studentsrestproj.demo.model;
+package studentsrestproj.demo.DTO;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "students")
-public class Student {
+public class StudentDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotBlank(message = "Name is mandatory")
     private String name;
-
-    @Email(message = "Email should be valid")
     private String email;
-
     private String phone;
-
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
-    private List<Marks> marks = new ArrayList<>();
-
+    private List<MarkDTO> marks = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -62,13 +43,11 @@ public class Student {
         this.phone = phone;
     }
 
-    public List<Marks> getMarks() {
+    public List<MarkDTO> getMarks() {
         return new ArrayList<>(marks);
     }
 
-    public void setMarks(List<Marks> marks) {
+    public void setMarks(List<MarkDTO> marks) {
         this.marks = marks;
     }
-
-
 }
