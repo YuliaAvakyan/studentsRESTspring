@@ -1,14 +1,12 @@
 package studentsrestproj.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import studentsrestproj.demo.model.Student;
 import studentsrestproj.demo.service.StudentService;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("api/v1/students")
@@ -68,15 +66,13 @@ public class StudentRestController {
         return ResponseEntity.ok(studentService.getStudentsWithMark(min, max));
     }
 
-
-
     @GetMapping("/countMarks")
     public ResponseEntity<List<Object[]>> getMarksCount() {
         return ResponseEntity.ok(studentService.getMarksCount());
     }
 
     @GetMapping("/sumMarks")
-    public ResponseEntity<Object> getSum() {
+    public ResponseEntity<List<Object[]>> getSum() {
         return ResponseEntity.ok(studentService.getSumMark());
     }
 

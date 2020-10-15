@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
@@ -20,7 +21,6 @@ public class Marks{
     private Integer mark;
 
     @JsonIgnore
-//    @JsonView
     @ManyToOne
     @JoinColumn(name = "student_id")
     private Student student;

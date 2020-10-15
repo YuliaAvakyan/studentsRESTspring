@@ -101,7 +101,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Object getSumMark() {
+    public List<Object[]> getSumMark() {
         return studentRepository.getSumMark();
     }
 }

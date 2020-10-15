@@ -17,5 +17,5 @@ public interface StudentService {
     List<Double> getAvgMarkForAll();
     List<Student> getStudentsWithMark(double m1, double m2);
     List<Object[]> getMarksCount();
-    Object getSumMark();
+    List<Object[]> getSumMark();
 }

@@ -25,9 +25,12 @@ public class Student {
 
     private String phone;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Marks> marks = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "students")
+    List<Elective> electives = new ArrayList<>();
 
 
     public Long getId() {
