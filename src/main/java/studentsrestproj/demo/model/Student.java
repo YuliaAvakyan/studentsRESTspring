@@ -7,11 +7,12 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "students")
-public class Student {
+public class Student implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,11 +26,11 @@ public class Student {
 
     private String phone;
 
-//    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "student", orphanRemoval = true, cascade = CascadeType.ALL)
+//    @OneToMany
     private List<Marks> marks = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "students")
+    @ManyToMany(mappedBy = "students", cascade = CascadeType.ALL)
     List<Elective> electives = new ArrayList<>();
 
 
@@ -69,9 +70,15 @@ public class Student {
         return new ArrayList<>(marks);
     }
 
-    public void setMarks(List<Marks> marks) {
-        this.marks = marks;
+    public void setMarks(Collection<Marks> marks){
+        this.marks.addAll(marks);
     }
 
+    public List<Elective> getElectives() {
+        return new ArrayList<>(electives);
+    }
 
+    public void setElectives(List<Elective> electives) {
+        this.electives = electives;
+    }
 }

@@ -24,3 +24,33 @@ insert into students (name, phone, email) values
 ('Nico Robin', '09078901234', 'robin@strawhatpirat.es'),
 ('Franky', '09089012345', 'franky@strawhatpirat.es'),
 ('Brook', '09090123456', 'brook@strawhatpirat.es');
+
+-- insert into elective (name) values
+-- ('Programming'),
+-- ('1C'),
+-- ('Music'),
+-- ('English speaking'),
+-- ('Chess'),
+-- ('Hackaton team'),
+-- ('British literature'),
+-- ('Directing'),
+-- ('Chorus'),
+-- ('Football'),
+-- ('Hockey');
+
+-- 1,2
+-- 1,3
+-- 1,4
+-- 1,8
+-- 1,14
+-- 2,5
+-- 2,6
+-- 2,7
+-- 2,8
+-- 3,5
+-- 3,4
+-- 3,3
+-- 4,3
+-- 4,2
+-- 4,8
+-- 4,11

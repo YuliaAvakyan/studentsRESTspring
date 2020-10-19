@@ -18,4 +18,6 @@ public interface StudentService {
     List<Student> getStudentsWithMark(double m1, double m2);
     List<Object[]> getMarksCount();
     List<Object[]> getSumMark();
+
+    List<Student> getElectiveStudents(Long id);
 }

@@ -1,13 +1,13 @@
 package studentsrestproj.demo.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Elective {
+public class Elective implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

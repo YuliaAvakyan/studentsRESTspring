@@ -76,6 +76,4 @@ public class StudentRestController {
         return ResponseEntity.ok(studentService.getSumMark());
     }
 
-
-
 }

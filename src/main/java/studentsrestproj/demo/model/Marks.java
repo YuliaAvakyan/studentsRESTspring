@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "marks")
-public class Marks{
+public class Marks implements Serializable {
 
     @JsonIgnore
     @Id
@@ -49,12 +49,11 @@ public class Marks{
         this.mark = mark;
     }
 
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
+//    public Student getStudent() {
+//        return student;
+//    }
+//
+//    public void setStudent(Student student) {
+//        this.student = student;
+//    }
 }

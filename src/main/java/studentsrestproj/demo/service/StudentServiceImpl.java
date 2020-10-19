@@ -48,6 +48,7 @@ public class StudentServiceImpl implements StudentService {
                     student.setPhone(newStudent.getPhone());
                     student.setEmail(newStudent.getEmail());
                     student.setMarks(newStudent.getMarks());
+//                    student.setElectives(newStudent.getElectives());
                     return studentRepository.save(student);
                 })
                 .orElseGet(() -> {
@@ -103,5 +104,13 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Object[]> getSumMark() {
         return studentRepository.getSumMark();
+    }
+
+
+    @Override
+    public List<Student> getElectiveStudents(Long id) {
+        List<Student> students = studentRepository.findAll();
+        List<Student> studentList = new ArrayList<>();
+        return students;
     }
 }
