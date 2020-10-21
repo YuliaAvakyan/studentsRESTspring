@@ -1,5 +1,7 @@
 package studentsrestproj.demo.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import studentsrestproj.demo.model.Student;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -18,6 +20,6 @@ public interface StudentService {
     List<Student> getStudentsWithMark(double m1, double m2);
     List<Object[]> getMarksCount();
     List<Object[]> getSumMark();
+    Page<Student> findPaginated(Pageable pageable);
 
-    List<Student> getElectiveStudents(Long id);
 }

@@ -1,6 +1,8 @@
 package studentsrestproj.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import studentsrestproj.demo.model.Marks;
 import studentsrestproj.demo.model.Student;
@@ -106,11 +108,9 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.getSumMark();
     }
 
-
     @Override
-    public List<Student> getElectiveStudents(Long id) {
-        List<Student> students = studentRepository.findAll();
-        List<Student> studentList = new ArrayList<>();
-        return students;
+    public Page<Student> findPaginated(Pageable pageable) {
+        return studentRepository.findAll(pageable);
     }
+
 }
