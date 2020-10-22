@@ -21,5 +21,7 @@ public interface StudentService {
     List<Object[]> getMarksCount();
     List<Object[]> getSumMark();
     Page<Student> findPaginated(Pageable pageable);
+    Page<Student> findFilterByName(String name, Pageable pageable);
+    Page<Student> findFilterByElective(String elective, Pageable pageable);
 
 }

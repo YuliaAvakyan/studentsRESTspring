@@ -113,4 +113,14 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.findAll(pageable);
     }
 
+    @Override
+    public Page<Student> findFilterByName(String name, Pageable pageable) {
+        return studentRepository.findByName(name, pageable);
+    }
+
+    @Override
+    public Page<Student> findFilterByElective(String elective, Pageable pageable) {
+
+        return null;
+    }
 }

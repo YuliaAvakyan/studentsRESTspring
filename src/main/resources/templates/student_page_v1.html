@@ -26,7 +26,7 @@
         </table>
         <div th:if="${page.totalPages > 0}" class="pagination"
              th:each="pageNumber : ${pageNumbers}">
-            <a th:href="@{/api/v1/pagedStudents(size=${page.size}, page=${pageNumber})}"
+            <a th:href="@{/api/v1/pagedStudents/v1(size=${page.size}, page=${pageNumber})}"
                th:text="${pageNumber}"
                th:class="${pageNumber == page.number + 1} ? active">
             </a>

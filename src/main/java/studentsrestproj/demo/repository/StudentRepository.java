@@ -1,5 +1,7 @@
 package studentsrestproj.demo.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -15,6 +17,8 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     @Query(value = "SELECT st.id from Student st join st.marks mk group by st.id having avg (mk) > 4")
     List<Object[]> getSumMark();
+
+    Page<Student> findByName(String name, Pageable pageable);
 
 
 //    @Query(value = "SELECT sum(m.mark) from Student s join s.marks m where s.id in " +

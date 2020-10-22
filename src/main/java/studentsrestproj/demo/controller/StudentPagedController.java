@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import studentsrestproj.demo.model.Student;
 import studentsrestproj.demo.service.StudentService;
 
@@ -32,23 +31,41 @@ public class StudentPagedController {
         this.studentService = studentService;
     }
 
-//    @GetMapping
-//    public String readPaginated (Model model,
-//                                  @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC, value = 3) Pageable pageable) {
-//
-//        Page<Student> studentPage = studentService.findPaginated(pageable);
-//        model.addAttribute("page", studentPage);
-//
-//        return "student_page";
-//    }
-
     @GetMapping("/json")
     public ResponseEntity<Page<Student>> read(@PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable) {
         final Page<Student> studentPage = studentService.findPaginated(pageable);
         return ResponseEntity.ok(studentPage);
     }
 
-    @GetMapping
+    @GetMapping("/filter")
+    public ResponseEntity<Page<Student>> studentsNameFilter(
+            String name,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable) {
+        Page<Student> studentPage = studentService.findFilterByName(name, pageable);
+        return ResponseEntity.ok(studentPage);
+    }
+
+//    @GetMapping("/filter")
+//    public ResponseEntity<Page<Student>> studentsElectiveFilter(
+//            String elective,
+//            @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable) {
+//        Page<Student> studentPage = studentService.findFilterByElective(elective, pageable);
+//        return ResponseEntity.ok(studentPage);
+//    }
+
+
+    @GetMapping("/v2")
+    public String studentsReadPage(
+            Model model,
+            @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC, size = 3) Pageable pageable) {
+
+        Page<Student> studentPage = studentService.findPaginated(pageable);
+        model.addAttribute("page", studentPage);
+        return "student_page_v2";
+    }
+
+
+    @GetMapping("/v1")
     public String studentsPaged(
             Model model,
             @RequestParam("page") Optional<Integer> page,
@@ -68,18 +85,8 @@ public class StudentPagedController {
             model.addAttribute("pageNumbers", pageNumbers);
         }
 
-        return "student_page";
+        return "student_page_v1";
     }
 
-    @GetMapping("/paged")
-    public String studentsReadPage(
-            Model model,
-            @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC, size = 3) Pageable pageable) {
 
-        Page<Student> studentPage = studentService.findPaginated(pageable);
-
-        model.addAttribute("page", studentPage);
-
-        return "student_page_v2";
-    }
 }
