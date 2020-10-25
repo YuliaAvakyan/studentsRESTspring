@@ -19,7 +19,7 @@ public interface StudentService {
     List<Double> getAvgMarkForAll();
     List<Student> getStudentsWithMark(double m1, double m2);
     List<Object[]> getMarksCount();
-    List<Object[]> getSumMark();
+//    List<Object[]> getSumMark();
     Page<Student> findPaginated(Pageable pageable);
     Page<Student> findFilterByName(String name, Pageable pageable);
     Page<Student> findFilterByElective(String elective, Pageable pageable);

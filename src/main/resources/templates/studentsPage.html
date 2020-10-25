@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Students</title>
-    <link href="../css/main.css" rel="stylesheet">
+<!--    <link href="../css/main.css" rel="stylesheet">-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -11,12 +11,15 @@
 
 <body>
 
-<div th:switch="${students}">
+<!--<div th:switch="${students}">-->
     <div class="row">
         <div class="container mt-3">
-            <h2 th:case="null">No students yet</h2>
-            <div th:case="*">
+<!--            <h2 th:case="null">No students yet</h2>-->
+<!--            <div th:case="*">-->
                 <h2>Students</h2>
+
+                <p><a class="btn btn-outline-primary" href="/signup">Add student</a></p>
+
                 <table class="table table-striped">
                     <tr>
                         <th>Name</th>
@@ -24,7 +27,8 @@
                         <th>Email</th>
                         <th colspan="2">Actions</th>
                     </tr>
-                    <tr th:each="student : ${students}">
+<!--                    <tr th:each="student : ${students}">-->
+                    <tr th:each="student : ${page.content}">
                         <td><a th:href="@{/student/{id}(id=${student.id})}" th:utext="${student.name}"></a></td>
                         <td th:text="${student.phone}"></td>
                         <td th:text="${student.email}"></td>
@@ -32,11 +36,20 @@
                         <td><a th:href="@{/delete/{id}(id=${student.id})}">delete</a></td>
                     </tr>
                 </table>
+<!--            </div>-->
+
+            <div>
+                <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+                    <span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
+                    <span th:unless="${page.number == i}">
+                        <a th:href="@{/students(page=${i},size=${page.size})}">[[${i}+1]]</a>
+                    </span>
+                </th:block>
             </div>
 
-            <p><a class="addBut" href="/signup">Add student</a></p>
+
         </div>
-    </div>
+<!--    </div>-->
 </div>
 
 </body>

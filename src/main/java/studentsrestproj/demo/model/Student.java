@@ -1,8 +1,8 @@
 package studentsrestproj.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -26,11 +26,15 @@ public class Student implements Serializable {
 
     private String phone;
 
-    @OneToMany(mappedBy = "student", orphanRemoval = true, cascade = CascadeType.ALL)
-//    @OneToMany
-    private List<Marks> marks = new ArrayList<>();
+//    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<Marks> marks = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "students", cascade = CascadeType.ALL)
+
+    @ManyToMany
+    @JoinTable(
+        name = "elective_students",
+        joinColumns = @JoinColumn(name = "student_id"),
+        inverseJoinColumns = @JoinColumn(name = "elective_id"))
     List<Elective> electives = new ArrayList<>();
 
 
@@ -66,13 +70,13 @@ public class Student implements Serializable {
         this.phone = phone;
     }
 
-    public List<Marks> getMarks() {
-        return new ArrayList<>(marks);
-    }
-
-    public void setMarks(Collection<Marks> marks){
-        this.marks.addAll(marks);
-    }
+//    public List<Marks> getMarks() {
+//        return new ArrayList<>(marks);
+//    }
+//
+//    public void setMarks(List<Marks> marks){
+//        this.marks.addAll(marks);
+//    }
 
     public List<Elective> getElectives() {
         return new ArrayList<>(electives);
@@ -81,4 +85,14 @@ public class Student implements Serializable {
     public void setElectives(List<Elective> electives) {
         this.electives = electives;
     }
+
+//    public void addMark(Marks mark) {
+//        marks.add(mark);
+//        mark.setStudent(this);
+//    }
+//
+//    public void removeMark(Marks mark) {
+//        marks.remove(mark);
+////        mark.setStudent(null);
+//    }
 }

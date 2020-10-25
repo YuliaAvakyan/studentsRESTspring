@@ -58,7 +58,6 @@ public class StudentPagedController {
     public String studentsReadPage(
             Model model,
             @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC, size = 3) Pageable pageable) {
-
         Page<Student> studentPage = studentService.findPaginated(pageable);
         model.addAttribute("page", studentPage);
         return "student_page_v2";

@@ -53,3 +53,19 @@ th, td {
 .addBut:hover, .addBut:active {
     background-color: white;
 }
+
+#left_block {
+    float: left;
+    display: block;
+    width: 300px;
+    border: 1px solid blue;
+    margin: 2px;
+}
+
+#right_block {
+    float: left;
+    display: block;
+    width: 300px;
+    border: 1px solid blue;
+    margin: 2px;
+}

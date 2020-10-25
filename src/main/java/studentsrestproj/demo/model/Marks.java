@@ -2,42 +2,49 @@ package studentsrestproj.demo.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "marks")
 public class Marks implements Serializable {
 
-    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
-    private String subject;
+//    private String subject;
     private Integer mark;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "subject_id", nullable = false)
+    private Subject subject;
+
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "student_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getSubject() {
+    public Subject getSubject() {
         return subject;
     }
 
-    public void setSubject(String subject) {
+    public void setSubject(Subject subject) {
         this.subject = subject;
     }
 
@@ -49,11 +56,13 @@ public class Marks implements Serializable {
         this.mark = mark;
     }
 
-//    public Student getStudent() {
-//        return student;
-//    }
-//
-//    public void setStudent(Student student) {
-//        this.student = student;
-//    }
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+
 }

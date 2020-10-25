@@ -3,11 +3,9 @@ package studentsrestproj.demo.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-public class Elective implements Serializable {
+public class Subject implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,9 +13,6 @@ public class Elective implements Serializable {
 
     @NotNull
     private String name;
-
-//    @ManyToMany
-//    private List<Student> students = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -35,11 +30,4 @@ public class Elective implements Serializable {
         this.name = name;
     }
 
-//    public List<Student> getStudents() {
-//        return students;
-//    }
-//
-//    public void setStudents(List<Student> students) {
-//        this.students = students;
-//    }
 }

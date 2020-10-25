@@ -71,9 +71,9 @@ public class StudentRestController {
         return ResponseEntity.ok(studentService.getMarksCount());
     }
 
-    @GetMapping("/sumMarks")
-    public ResponseEntity<List<Object[]>> getSum() {
-        return ResponseEntity.ok(studentService.getSumMark());
-    }
+//    @GetMapping("/sumMarks")
+//    public ResponseEntity<List<Object[]>> getSum() {
+//        return ResponseEntity.ok(studentService.getSumMark());
+//    }
 
 }
