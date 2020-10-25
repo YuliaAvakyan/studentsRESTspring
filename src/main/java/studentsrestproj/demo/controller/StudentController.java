@@ -9,9 +9,8 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import studentsrestproj.demo.DTO.MarksCreateDTO;
 import studentsrestproj.demo.model.Elective;
 import studentsrestproj.demo.model.Marks;
 import studentsrestproj.demo.model.Student;
@@ -44,11 +43,11 @@ public class StudentController {
     @GetMapping("/signup")
     public String showAddForm(Student student, Model model) {
         List<Elective> electiveList = electiveService.readAll();
-//        List<Marks> marksList = marksService.readAll();
+        MarksCreateDTO marksCreateDTO = new MarksCreateDTO();
         model.addAttribute("student", student);
         model.addAttribute("electives", electiveList);
-//        model.addAttribute("marks", marksList);
         model.addAttribute("subjects", subjectService.readAll());
+        model.addAttribute("form", marksCreateDTO);
         return "add-student";
     }
 
@@ -65,17 +64,28 @@ public class StudentController {
         return "redirect:/students";
     }
 
+    @PostMapping("/addmark")
+    public String addMarks(@ModelAttribute MarksCreateDTO form, Model model) {
+
+        marksService.saveAll(form.getMarks());
+        model.addAttribute("marks", marksService.readAll());
+        return "redirect:/students";
+    }
+
     //UPDATE
     @GetMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
         Student student = studentService.read(id);
+        MarksCreateDTO marksCreateDTO = new MarksCreateDTO();
         List<Elective> electiveList = electiveService.readAll();
         List<Marks> marksList = marksService.findByStudentId(id);
+        marksCreateDTO.setMarks(marksList);
         List<Subject> subjectList = subjectService.readAll();
         model.addAttribute("student", student);
         model.addAttribute("electives", electiveList);
         model.addAttribute("marks", marksList);
         model.addAttribute("subjects", subjectList);
+        model.addAttribute("form", marksCreateDTO);
         return "update-student";
     }
 
@@ -88,13 +98,35 @@ public class StudentController {
             List<Marks> marksList = marksService.findByStudentId(id);
             List<Subject> subjectList = subjectService.readAll();
             model.addAttribute("electives", electiveList);
-            model.addAttribute("marks", marksList);
+            model.addAttribute("marksList", marksList);
             model.addAttribute("subjects", subjectList);
             return "update-student";
         }
 
         studentService.update(student, id);
         model.addAttribute("student", studentService.readAll());
+        return "redirect:/students";
+    }
+
+    @PostMapping("/student/{id}/update/marks")
+    public String updateMark(@PathVariable (value = "id") Long studId,
+//                                            @PathVariable (value = "m_id") Long markId,
+                                            @RequestBody Marks newMark,
+                                            BindingResult result, Model model) {
+
+        List<Marks> marksList = marksService.findByStudentId(studId);
+        List<Subject> subjectList = subjectService.readAll();
+
+        if (result.hasErrors()) {
+
+            model.addAttribute("marksBySt", marksList);
+            model.addAttribute("subjects", subjectList);
+            return "update-student";
+        }
+
+//        marksService.update(newMark, markId);
+
+//        model.addAttribute("marks", marksService.readAll());
         return "redirect:/students";
     }
 

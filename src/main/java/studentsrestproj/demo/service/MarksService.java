@@ -12,4 +12,6 @@ public interface MarksService {
     List<Marks> findByStudentId(Long studentId);
     Marks update(Marks mark, Long id);
 
+    List<Marks> saveAll(List<Marks> marks);
+
 }

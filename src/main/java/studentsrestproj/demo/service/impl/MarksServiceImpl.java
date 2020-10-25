@@ -55,4 +55,9 @@ public class MarksServiceImpl implements MarksService {
                     return marksRepository.save(newMark);
                 });
     }
+
+    @Override
+    public List<Marks> saveAll(List<Marks> marks) {
+        return marksRepository.saveAll(marks);
+    }
 }
