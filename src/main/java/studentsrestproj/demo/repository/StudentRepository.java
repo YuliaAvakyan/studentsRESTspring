@@ -12,8 +12,8 @@ import java.util.Map;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
-    @Query(value = "SELECT COUNT (M.mark), M.subject FROM Marks M GROUP BY M.subject")
-    List<Object[]> getCountMarks();
+//    @Query(value = "SELECT COUNT (M.mark), M.subject FROM Marks M GROUP BY M.subject")
+//    List<Object[]> getCountMarks();
 
 //    @Query(value = "SELECT st.id from Student st join st.marks mk group by st.id having avg (mk) > 4")
 //    List<Object[]> getSumMark();

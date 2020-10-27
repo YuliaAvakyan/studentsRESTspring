@@ -23,14 +23,17 @@ public class Marks implements Serializable {
 //    private String subject;
     private Integer mark;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "subject_id", nullable = false)
-    private Subject subject;
+    @OneToMany(mappedBy = "mark", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<StudentMarkSubject> studentMarkSubjects;
 
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "student_id", nullable = false)
-    private Student student;
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "subject_id", nullable = false)
+//    private Subject subject;
+
+//    @JsonIgnore
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "student_id", nullable = false)
+//    private Student student;
 
     public Long getId() {
         return id;
@@ -40,13 +43,14 @@ public class Marks implements Serializable {
         this.id = id;
     }
 
-    public Subject getSubject() {
-        return subject;
-    }
 
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
+    //    public Subject getSubject() {
+//        return subject;
+//    }
+//
+//    public void setSubject(Subject subject) {
+//        this.subject = subject;
+//    }
 
     public Integer getMark() {
         return mark;
@@ -56,13 +60,21 @@ public class Marks implements Serializable {
         this.mark = mark;
     }
 
-    public Student getStudent() {
-        return student;
+    public List<StudentMarkSubject> getStudentMarkSubjects() {
+        return studentMarkSubjects;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setStudentMarkSubjects(List<StudentMarkSubject> studentMarkSubjects) {
+        this.studentMarkSubjects = studentMarkSubjects;
     }
+
+    //    public Student getStudent() {
+//        return student;
+//    }
+//
+//    public void setStudent(Student student) {
+//        this.student = student;
+//    }
 
 
 }

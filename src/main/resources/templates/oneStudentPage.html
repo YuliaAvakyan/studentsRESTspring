@@ -40,10 +40,19 @@
 
                 <ul class="list-group col-sm">
                     <li class="list-group-item active">Marks</li>
-                    <li class="list-group-item" th:each="mark : ${marks}"
-                        th:text="${mark.mark + ' ' + mark.subject.name}"></li>
+                    <li class="list-group-item" th:each="s : ${student.getStudentMarkSubjects()}"
+                        th:text="${s.mark.getMark() + ' ' + s.getSubject().getName()}"></li>
                 </ul>
             </div>
+        </div>
+
+<!--            <div class="col">-->
+<!--                <ul class="list-group col-sm">-->
+<!--                    <li class="list-group-item active">Marks</li>-->
+<!--                    <li class="list-group-item" th:each="e : ${st_m_subj}"-->
+<!--                        th:text="${e.mark.getMark() + ' ' + e.subject.getName()}"></li>-->
+<!--                </ul>-->
+<!--            </div>-->
         </div>
 
 

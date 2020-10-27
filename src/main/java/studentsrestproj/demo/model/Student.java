@@ -26,15 +26,14 @@ public class Student implements Serializable {
 
     private String phone;
 
-//    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Marks> marks = new ArrayList<>();
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<StudentMarkSubject> studentMarkSubjects;
 
-
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
-        name = "elective_students",
-        joinColumns = @JoinColumn(name = "student_id"),
-        inverseJoinColumns = @JoinColumn(name = "elective_id"))
+            name = "elective_students",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "elective_id"))
     List<Elective> electives = new ArrayList<>();
 
 
@@ -70,14 +69,6 @@ public class Student implements Serializable {
         this.phone = phone;
     }
 
-//    public List<Marks> getMarks() {
-//        return new ArrayList<>(marks);
-//    }
-//
-//    public void setMarks(List<Marks> marks){
-//        this.marks.addAll(marks);
-//    }
-
     public List<Elective> getElectives() {
         return new ArrayList<>(electives);
     }
@@ -86,7 +77,15 @@ public class Student implements Serializable {
         this.electives = electives;
     }
 
-//    public void addMark(Marks mark) {
+    public List<StudentMarkSubject> getStudentMarkSubjects() {
+        return studentMarkSubjects;
+    }
+
+    public void setStudentMarkSubjects(List<StudentMarkSubject> studentMarkSubjects) {
+        this.studentMarkSubjects = studentMarkSubjects;
+    }
+
+    //    public void addMark(Marks mark) {
 //        marks.add(mark);
 //        mark.setStudent(this);
 //    }

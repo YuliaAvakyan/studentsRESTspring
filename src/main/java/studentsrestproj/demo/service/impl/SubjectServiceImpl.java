@@ -1,22 +1,29 @@
 package studentsrestproj.demo.service.impl;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import studentsrestproj.demo.model.Subject;
+import studentsrestproj.demo.model.Subject;
+import studentsrestproj.demo.repository.MarksRepository;
 import studentsrestproj.demo.repository.SubjectRepository;
+import studentsrestproj.demo.service.MarksService;
 import studentsrestproj.demo.service.SubjectService;
 
 import java.util.List;
 
 @Service
-public class SublectServiceImpl implements SubjectService {
+public class SubjectServiceImpl implements SubjectService {
 
     private final SubjectRepository subjectRepository;
 
     @Autowired
-    public SublectServiceImpl(SubjectRepository subjectRepository) {
+    public SubjectServiceImpl(SubjectRepository subjectRepository) {
         this.subjectRepository = subjectRepository;
+    }
+
+    @Override
+    public Subject create(Subject subject) {
+        return subjectRepository.save(subject);
     }
 
     @Override

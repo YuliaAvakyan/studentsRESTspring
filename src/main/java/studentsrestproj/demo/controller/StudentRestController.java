@@ -48,28 +48,28 @@ public class StudentRestController {
     }
 
 
-    @GetMapping("/avg/{id}")
-    public ResponseEntity<Double> averageMark(@PathVariable("id") Long id) {
+//    @GetMapping("/avg/{id}")
+//    public ResponseEntity<Double> averageMark(@PathVariable("id") Long id) {
+//
+//        return ResponseEntity.ok(studentService.getAvgMark(id));
+//    }
+//
+//    @GetMapping("/allAvg")
+//    public ResponseEntity<List<Double>> averageMarkAll() {
+//        return ResponseEntity.ok(studentService.getAvgMarkForAll());
+//    }
+//
+//
+//    @RequestMapping("/avg")
+//    public ResponseEntity<List<Student>> studentWithMark(@RequestParam("min") double min,
+//                                                         @RequestParam("max") double max) {
+//        return ResponseEntity.ok(studentService.getStudentsWithMark(min, max));
+//    }
 
-        return ResponseEntity.ok(studentService.getAvgMark(id));
-    }
-
-    @GetMapping("/allAvg")
-    public ResponseEntity<List<Double>> averageMarkAll() {
-        return ResponseEntity.ok(studentService.getAvgMarkForAll());
-    }
-
-
-    @RequestMapping("/avg")
-    public ResponseEntity<List<Student>> studentWithMark(@RequestParam("min") double min,
-                                                         @RequestParam("max") double max) {
-        return ResponseEntity.ok(studentService.getStudentsWithMark(min, max));
-    }
-
-    @GetMapping("/countMarks")
-    public ResponseEntity<List<Object[]>> getMarksCount() {
-        return ResponseEntity.ok(studentService.getMarksCount());
-    }
+//    @GetMapping("/countMarks")
+//    public ResponseEntity<List<Object[]>> getMarksCount() {
+//        return ResponseEntity.ok(studentService.getMarksCount());
+//    }
 
 //    @GetMapping("/sumMarks")
 //    public ResponseEntity<List<Object[]>> getSum() {
