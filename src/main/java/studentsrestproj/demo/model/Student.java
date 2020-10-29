@@ -1,13 +1,10 @@
 package studentsrestproj.demo.model;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -26,8 +23,8 @@ public class Student implements Serializable {
 
     private String phone;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<StudentMarkSubject> studentMarkSubjects;
+    @OneToMany(cascade = {CascadeType.PERSIST})
+    private List<StudentMarkSubject> studentMarkSubjects = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(

@@ -23,8 +23,8 @@ public class Marks implements Serializable {
 //    private String subject;
     private Integer mark;
 
-    @OneToMany(mappedBy = "mark", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<StudentMarkSubject> studentMarkSubjects;
+//    @OneToMany(mappedBy = "mark", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//    private List<StudentMarkSubject> studentMarkSubjects;
 
 //    @ManyToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "subject_id", nullable = false)
@@ -60,13 +60,13 @@ public class Marks implements Serializable {
         this.mark = mark;
     }
 
-    public List<StudentMarkSubject> getStudentMarkSubjects() {
-        return studentMarkSubjects;
-    }
-
-    public void setStudentMarkSubjects(List<StudentMarkSubject> studentMarkSubjects) {
-        this.studentMarkSubjects = studentMarkSubjects;
-    }
+//    public List<StudentMarkSubject> getStudentMarkSubjects() {
+//        return studentMarkSubjects;
+//    }
+//
+//    public void setStudentMarkSubjects(List<StudentMarkSubject> studentMarkSubjects) {
+//        this.studentMarkSubjects = studentMarkSubjects;
+//    }
 
     //    public Student getStudent() {
 //        return student;

@@ -12,11 +12,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import studentsrestproj.demo.model.Elective;
-import studentsrestproj.demo.model.Student;
+import studentsrestproj.demo.model.*;
 import studentsrestproj.demo.service.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -42,27 +43,29 @@ public class StudentController {
     public String showAddForm(Student student, Model model) {
         List<Elective> electiveList = electiveService.readAll();
         model.addAttribute("student", student);
-        model.addAttribute("electives", electiveList);
+        model.addAttribute("electivesList", electiveList);
         model.addAttribute("subjects", subjectService.readAll());
         model.addAttribute("marks", marksService.readAll());
-        model.addAttribute("mark_subj", studMarkSubjService.readAll());
+        model.addAttribute("mark_subj", new StudentMarkSubject());
         return "add-student";
     }
 
     @PostMapping("/addstudent")
-    public String addStudent(@Valid Student student, BindingResult result, Model model) {
+    public String addStudent(@Valid Student student,
+                             BindingResult result, Model model) {
 
         if (result.hasErrors()) {
-            model.addAttribute("electives", electiveService.readAll());
+            model.addAttribute("electivesList", electiveService.readAll());
             model.addAttribute("subjects", subjectService.readAll());
             model.addAttribute("marks", marksService.readAll());
-            model.addAttribute("mark_subj", studMarkSubjService.readAll());
+            model.addAttribute("mark_subj", new StudentMarkSubject());
             return "add-student";
+
         }
         studentService.create(student);
-        model.addAttribute("students", studentService.readAll());
         return "redirect:/students";
     }
+
 
 
     //UPDATE
@@ -72,6 +75,8 @@ public class StudentController {
         List<Elective> electiveList = electiveService.readAll();
         model.addAttribute("student", student);
         model.addAttribute("electives", electiveList);
+        model.addAttribute("subjects", subjectService.readAll());
+        model.addAttribute("marks", marksService.readAll());
         return "update-student";
     }
 
@@ -82,6 +87,8 @@ public class StudentController {
 //            student.setId(id);
             List<Elective> electiveList = electiveService.readAll();
             model.addAttribute("electives", electiveList);
+            model.addAttribute("subjects", subjectService.readAll());
+            model.addAttribute("marks", marksService.readAll());
             return "update-student";
         }
 

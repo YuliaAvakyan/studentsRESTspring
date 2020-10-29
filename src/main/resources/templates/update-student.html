@@ -1,121 +1,149 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title th:text="'Update a student'" />
+    <meta charset="UTF-8"/>
+    <title th:text="'Update a student'"/>
 
-<!--    <link href="../css/main.css" rel="stylesheet">-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!--    <link href="../css/main.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
 </head>
 <body>
-    <div class="container mt-3">
-        <h2>Update student</h2>
+<div class="container mt-3">
+    <h2>Update student</h2>
 
-     <form class="mt-3 mb-3" action="#"
-              th:action="@{/update/{id}(id=${student.id})}"
-              th:object="${student}"
-              method="post">
+    <form class="mt-3 mb-3" action="#"
+          th:action="@{/update/{id}(id=${student.id})}"
+          th:object="${student}"
+          method="post">
 
-         <div class="btn-toolbar mt-3  mb-3" role="toolbar" aria-label="Toolbar with button groups">
-             <div class="btn-group mr-2" role="group" aria-label="Second group">
-                 <a class="btn btn-outline-primary" href="/students">Back</a>
-             </div>
-             <div class="btn-group" role="group" aria-label="Third group">
-                 <input class="btn btn-outline-success" type="submit" value="Save">
-             </div>
-         </div>
+        <div class="btn-toolbar mt-3  mb-3" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group mr-2" role="group" aria-label="Second group">
+                <a class="btn btn-outline-primary" href="/students">Back</a>
+            </div>
+            <div class="btn-group" role="group" aria-label="Third group">
+                <input class="btn btn-outline-success" type="submit" value="Save">
+            </div>
+        </div>
 
-            <div class="form-group row">
-                <label for="name" class="col-sm-2 col-form-label">Name</label>
-                <div class="col-sm-5">
-                    <input class="form-control" type="text" th:field="*{name}" id="name" placeholder="Name">
-                    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-5">
+                <input class="form-control" type="text" th:field="*{name}" id="name" placeholder="Name">
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Phone</label>
+            <div class="col-sm-5">
+                <input class="form-control" type="text" th:field="*{phone}" id="phone" placeholder="Phone">
+                <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="email" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-5">
+                <input class="form-control" type="text" th:field="*{email}" id="email" placeholder="Email">
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Electives</label>
+            <div class="col-sm-5">
+                <div class="form-check" th:each="elective : ${electives}">
+                    <input class="form-check-input" type="checkbox" th:value="${elective.id}" th:field="*{electives}"
+                           id="elect">
+                    <label class="form-check-label" for="elect" th:text="${elective.name}"></label>
                 </div>
             </div>
+        </div>
 
-            <div class="form-group row">
-                <label for="name" class="col-sm-2 col-form-label">Phone</label>
-                <div class="col-sm-5">
-                    <input class="form-control" type="text" th:field="*{phone}" id="phone" placeholder="Phone">
-                    <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></span>
-                </div>
-            </div>
 
-            <div class="form-group row">
-                <label for="email" class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-5">
-                    <input class="form-control" type="text" th:field="*{email}" id="email" placeholder="Email">
-                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-                </div>
-            </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Marks</label>
 
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Electives</label>
-                <div class="col-sm-5">
-                    <div class="form-check" th:each="elective : ${electives}">
-                        <input class="form-check-input" type="checkbox" th:value="${elective.id}" th:field="*{electives}" id="elect">
-                        <label class="form-check-label" for="elect" th:text="${elective.name}"></label>
+            <div class="form-group col-sm-5" th:each="sms, itemStat : *{studentMarkSubjects}">
+                <div class="form-row">
+                    <!--                    <div class="form-row">-->
+                    <div class="form-group col-sm-5">
+                        <select class="form-control"  id="subjects" name="subjects" th:field="*{studentMarkSubjects[__${itemStat.index}__].subject.id}">
+                            <option  th:each="subject : ${subjects}" th:text="${subject.name}" th:value="${subject.id}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <select class="form-control"  id="marks" name="marks" th:field="*{studentMarkSubjects[__${itemStat.index}__].mark.id}">
+                            <option th:each="mark : ${marks}" th:text="${mark.mark}" th:value="${mark.id}" ></option>
+                        </select>
                     </div>
                 </div>
             </div>
+        </div>
 
-<!--            <div class="form-row">-->
-<!--                <label class="col-sm-2 col-form-label">Marks</label>-->
+        <!--            <div class="form-row">-->
+        <!--                <label class="col-sm-2 col-form-label">Marks</label>-->
 
-<!--                <div class="form-group col-sm-5">-->
-<!--                    <div class="form-row" th:each="mark: ${marks}">-->
-<!--                        <div class="form-group col-sm-5">-->
-<!--                            <select class="form-control"  id="subjects" name="subjects" >-->
-<!--                                <option th:each="subject : ${subjects}" th:text="${subject.name}" th:value="${subject.name}" th:selected="${subject.id == mark.subject.id}"></option>-->
-<!--                            </select>-->
-<!--                        </div>-->
-<!--                        <div class="form-group col-sm-2">-->
-<!--                            <input class="form-control " th:value="${mark.mark}" />-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <input class="btn btn-primary" type="button" value="Add">-->
-<!--                </div>-->
-<!--            </div>-->
+        <!--                <div class="form-group col-sm-5">-->
+        <!--                    <div class="form-row" th:each="mark: ${marks}">-->
+        <!--                        <div class="form-group col-sm-5">-->
+        <!--                            <select class="form-control"  id="subjects" name="subjects" >-->
+        <!--                                <option th:each="subject : ${subjects}" th:text="${subject.name}" th:value="${subject.name}" th:selected="${subject.id == mark.subject.id}"></option>-->
+        <!--                            </select>-->
+        <!--                        </div>-->
+        <!--                        <div class="form-group col-sm-2">-->
+        <!--                            <input class="form-control " th:value="${mark.mark}" />-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                    <input class="btn btn-primary" type="button" value="Add">-->
+        <!--                </div>-->
+        <!--            </div>-->
 
-<!--                <tr th:each="mark, itemStat : *{marks}">-->
-<!--                    <td><input th:field="*{marks[__${itemStat.index}__].subject.name}" /></td>-->
-<!--                    <td><input th:field="*{marks[__${itemStat.index}__].mark}" /></td>-->
-<!--                </tr>-->
-
-
-
-        </form>
+        <!--                <tr th:each="mark, itemStat : *{marks}">-->
+        <!--                    <td><input th:field="*{marks[__${itemStat.index}__].subject.name}" /></td>-->
+        <!--                    <td><input th:field="*{marks[__${itemStat.index}__].mark}" /></td>-->
+        <!--                </tr>-->
 
 
-<!--        <form action="#" th:action="@{/student/{id}/update/marks/{m_id}(id=${student.id}, m_id =${marks.id})}" th:object="${form}"-->
-<!--              method="post">-->
-<!--            <fieldset>-->
-<!--                <input class="btn btn-outline-primary" type="submit" id="submitButton" th:value="Save">-->
+    </form>
 
-<!--                <div class="form-row">-->
-<!--                    <label class="col-sm-2 col-form-label">Marks</label>-->
 
-<!--                    <div class="form-group col-sm-5">-->
-<!--                        <div class="form-row" th:each="mark, itemStat : *{marks}">-->
-<!--                            <div class="form-group col-sm-5">-->
-<!--                                <select class="form-control"  id="subjects" name="subjects" >-->
-<!--                                    <option th:each="subject : ${subjects}" th:text="${subject.name}" th:value="${subject.name}" th:field="*{marks[__${itemStat.index}__].subject.name}"></option>-->
-<!--                                </select>-->
-<!--                            </div>-->
-<!--                            <div class="form-group col-sm-2">-->
-<!--                                <input class="form-control " th:field="*{marks[__${itemStat.index}__].mark}" />-->
-<!--                                &lt;!&ndash;                        <input class="form-control " th:value="${mark.mark}" />&ndash;&gt;-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        &lt;!&ndash;                    <input class="btn btn-primary" type="button" value="Add">&ndash;&gt;-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </fieldset>-->
-<!--        </form>-->
-    </div>
+    <!--        <form action="#" th:action="@{/student/{id}/update/marks/{m_id}(id=${student.id}, m_id =${marks.id})}" th:object="${form}"-->
+    <!--              method="post">-->
+    <!--            <fieldset>-->
+    <!--                <input class="btn btn-outline-primary" type="submit" id="submitButton" th:value="Save">-->
+
+    <!--                <div class="form-row">-->
+    <!--                    <label class="col-sm-2 col-form-label">Marks</label>-->
+
+    <!--                    <div class="form-group col-sm-5">-->
+    <!--                        <div class="form-row" th:each="mark, itemStat : *{marks}">-->
+    <!--                            <div class="form-group col-sm-5">-->
+    <!--                                <select class="form-control"  id="subjects" name="subjects" >-->
+    <!--                                    <option th:each="subject : ${subjects}" th:text="${subject.name}" th:value="${subject.name}" th:field="*{marks[__${itemStat.index}__].subject.name}"></option>-->
+    <!--                                </select>-->
+    <!--                            </div>-->
+    <!--                            <div class="form-group col-sm-2">-->
+    <!--                                <input class="form-control " th:field="*{marks[__${itemStat.index}__].mark}" />-->
+    <!--                                &lt;!&ndash;                        <input class="form-control " th:value="${mark.mark}" />&ndash;&gt;-->
+    <!--                            </div>-->
+    <!--                        </div>-->
+    <!--                        &lt;!&ndash;                    <input class="btn btn-primary" type="button" value="Add">&ndash;&gt;-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </fieldset>-->
+    <!--        </form>-->
+</div>
 </body>
 </html>
