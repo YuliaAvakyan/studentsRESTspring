@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import studentsrestproj.demo.model.Student;
+import studentsrestproj.demo.model.StudentMarkSubject;
+import studentsrestproj.demo.repository.StudMarkSubjRepository;
 import studentsrestproj.demo.repository.StudentRepository;
 import studentsrestproj.demo.service.StudentService;
 
@@ -14,15 +16,23 @@ import java.util.*;
 public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
+    private final StudMarkSubjRepository studMarkSubjRepository;
 
     @Autowired
-    public StudentServiceImpl(StudentRepository studentRepository) {
+    public StudentServiceImpl(StudentRepository studentRepository, StudMarkSubjRepository studMarkSubjRepository) {
         this.studentRepository = studentRepository;
+        this.studMarkSubjRepository = studMarkSubjRepository;
     }
 
 
     @Override
     public Student create(Student student) {
+        for (StudentMarkSubject ms : student.getStudentMarkSubjects()) {
+            StudentMarkSubject newMs = studMarkSubjRepository.getStudentMarkSubjectByMarkAndSubject(ms.getMark(), ms.getSubject());
+            if (newMs != null) {
+                ms.setId(newMs.getId());
+            }
+        }
         return studentRepository.save(student);
     }
 
@@ -39,18 +49,21 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student update(Student newStudent, Long id) {
-//        if (studentRepository.existsById(id)) {
-//            student.setId(id);
-//            studentRepository.save(student);
-//        }
+
+        for (StudentMarkSubject ms : newStudent.getStudentMarkSubjects()) {
+            StudentMarkSubject newMs = studMarkSubjRepository.getStudentMarkSubjectByMarkAndSubject(ms.getMark(), ms.getSubject());
+            if (newMs != null) {
+                ms.setId(newMs.getId());
+            }
+        }
 
         return studentRepository.findById(id)
                 .map(student -> {
                     student.setName(newStudent.getName());
                     student.setPhone(newStudent.getPhone());
                     student.setEmail(newStudent.getEmail());
-//                    student.setMarks(newStudent.getMarks());
                     student.setElectives(newStudent.getElectives());
+                    student.setStudentMarkSubjects(newStudent.getStudentMarkSubjects());
                     return studentRepository.save(student);
                 })
                 .orElseGet(() -> {

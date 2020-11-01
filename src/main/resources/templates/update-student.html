@@ -77,73 +77,21 @@
 
             <div class="form-group col-sm-5" th:each="sms, itemStat : *{studentMarkSubjects}">
                 <div class="form-row">
-                    <!--                    <div class="form-row">-->
                     <div class="form-group col-sm-5">
-                        <select class="form-control"  id="subjects" name="subjects" th:field="*{studentMarkSubjects[__${itemStat.index}__].subject.id}">
+                        <select class="form-control"  id="subjects" name="subjects" th:field="*{studentMarkSubjects[__${itemStat.index}__].subject}">
                             <option  th:each="subject : ${subjects}" th:text="${subject.name}" th:value="${subject.id}"></option>
                         </select>
                     </div>
                     <div class="form-group col-sm-2">
-                        <select class="form-control"  id="marks" name="marks" th:field="*{studentMarkSubjects[__${itemStat.index}__].mark.id}">
+                        <select class="form-control"  id="marks" name="marks" th:field="*{studentMarkSubjects[__${itemStat.index}__].mark}">
                             <option th:each="mark : ${marks}" th:text="${mark.mark}" th:value="${mark.id}" ></option>
                         </select>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!--            <div class="form-row">-->
-        <!--                <label class="col-sm-2 col-form-label">Marks</label>-->
-
-        <!--                <div class="form-group col-sm-5">-->
-        <!--                    <div class="form-row" th:each="mark: ${marks}">-->
-        <!--                        <div class="form-group col-sm-5">-->
-        <!--                            <select class="form-control"  id="subjects" name="subjects" >-->
-        <!--                                <option th:each="subject : ${subjects}" th:text="${subject.name}" th:value="${subject.name}" th:selected="${subject.id == mark.subject.id}"></option>-->
-        <!--                            </select>-->
-        <!--                        </div>-->
-        <!--                        <div class="form-group col-sm-2">-->
-        <!--                            <input class="form-control " th:value="${mark.mark}" />-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                    <input class="btn btn-primary" type="button" value="Add">-->
-        <!--                </div>-->
-        <!--            </div>-->
-
-        <!--                <tr th:each="mark, itemStat : *{marks}">-->
-        <!--                    <td><input th:field="*{marks[__${itemStat.index}__].subject.name}" /></td>-->
-        <!--                    <td><input th:field="*{marks[__${itemStat.index}__].mark}" /></td>-->
-        <!--                </tr>-->
-
-
     </form>
 
-
-    <!--        <form action="#" th:action="@{/student/{id}/update/marks/{m_id}(id=${student.id}, m_id =${marks.id})}" th:object="${form}"-->
-    <!--              method="post">-->
-    <!--            <fieldset>-->
-    <!--                <input class="btn btn-outline-primary" type="submit" id="submitButton" th:value="Save">-->
-
-    <!--                <div class="form-row">-->
-    <!--                    <label class="col-sm-2 col-form-label">Marks</label>-->
-
-    <!--                    <div class="form-group col-sm-5">-->
-    <!--                        <div class="form-row" th:each="mark, itemStat : *{marks}">-->
-    <!--                            <div class="form-group col-sm-5">-->
-    <!--                                <select class="form-control"  id="subjects" name="subjects" >-->
-    <!--                                    <option th:each="subject : ${subjects}" th:text="${subject.name}" th:value="${subject.name}" th:field="*{marks[__${itemStat.index}__].subject.name}"></option>-->
-    <!--                                </select>-->
-    <!--                            </div>-->
-    <!--                            <div class="form-group col-sm-2">-->
-    <!--                                <input class="form-control " th:field="*{marks[__${itemStat.index}__].mark}" />-->
-    <!--                                &lt;!&ndash;                        <input class="form-control " th:value="${mark.mark}" />&ndash;&gt;-->
-    <!--                            </div>-->
-    <!--                        </div>-->
-    <!--                        &lt;!&ndash;                    <input class="btn btn-primary" type="button" value="Add">&ndash;&gt;-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--            </fieldset>-->
-    <!--        </form>-->
 </div>
 </body>
 </html>

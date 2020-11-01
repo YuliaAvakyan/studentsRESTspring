@@ -12,12 +12,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import studentsrestproj.demo.model.*;
+import studentsrestproj.demo.model.Elective;
+import studentsrestproj.demo.model.Student;
+import studentsrestproj.demo.model.StudentMarkSubject;
 import studentsrestproj.demo.service.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller

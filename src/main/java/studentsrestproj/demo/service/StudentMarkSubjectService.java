@@ -1,6 +1,8 @@
 package studentsrestproj.demo.service;
 
+import studentsrestproj.demo.model.Marks;
 import studentsrestproj.demo.model.StudentMarkSubject;
+import studentsrestproj.demo.model.Subject;
 
 import java.util.List;
 

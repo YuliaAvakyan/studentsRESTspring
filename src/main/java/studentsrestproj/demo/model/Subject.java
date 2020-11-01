@@ -1,9 +1,11 @@
 package studentsrestproj.demo.model;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 public class Subject implements Serializable {
@@ -14,9 +16,6 @@ public class Subject implements Serializable {
 
     @NotNull
     private String name;
-
-    @OneToMany(mappedBy = "subject", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<StudentMarkSubject> studentMarkSubjects;
 
     public Long getId() {
         return id;
@@ -32,13 +31,5 @@ public class Subject implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<StudentMarkSubject> getStudentMarkSubjects() {
-        return studentMarkSubjects;
-    }
-
-    public void setStudentMarkSubjects(List<StudentMarkSubject> studentMarkSubjects) {
-        this.studentMarkSubjects = studentMarkSubjects;
     }
 }

@@ -16,9 +16,6 @@ public class Elective implements Serializable {
     @NotNull
     private String name;
 
-//    @ManyToMany
-//    private List<Student> students = new ArrayList<>();
-
     public Long getId() {
         return id;
     }
@@ -34,12 +31,4 @@ public class Elective implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
-//    public List<Student> getStudents() {
-//        return students;
-//    }
-//
-//    public void setStudents(List<Student> students) {
-//        this.students = students;
-//    }
 }

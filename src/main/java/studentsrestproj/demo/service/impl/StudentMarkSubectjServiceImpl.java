@@ -2,19 +2,21 @@ package studentsrestproj.demo.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import studentsrestproj.demo.model.Marks;
 import studentsrestproj.demo.model.StudentMarkSubject;
+import studentsrestproj.demo.model.Subject;
 import studentsrestproj.demo.repository.StudMarkSubjRepository;
 import studentsrestproj.demo.service.StudentMarkSubjectService;
 
 import java.util.List;
 
 @Service
-public class SubMarkSubjServiceImpl implements StudentMarkSubjectService {
+public class StudentMarkSubectjServiceImpl implements StudentMarkSubjectService {
 
     private final StudMarkSubjRepository repository;
 
     @Autowired
-    public SubMarkSubjServiceImpl(StudMarkSubjRepository repository) {
+    public StudentMarkSubectjServiceImpl(StudMarkSubjRepository repository) {
         this.repository = repository;
     }
 

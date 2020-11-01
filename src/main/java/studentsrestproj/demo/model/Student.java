@@ -23,7 +23,12 @@ public class Student implements Serializable {
 
     private String phone;
 
-    @OneToMany(cascade = {CascadeType.PERSIST})
+    //    @OneToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL}) //(cascade = CascadeType.PERSIST)
+    @JoinTable(
+            name = "student_mark_subject",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "mark_subject_id"))
     private List<StudentMarkSubject> studentMarkSubjects = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.PERSIST)

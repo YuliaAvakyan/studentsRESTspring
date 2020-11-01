@@ -45,15 +45,6 @@ public class StudentPagedController {
         return ResponseEntity.ok(studentPage);
     }
 
-//    @GetMapping("/filter")
-//    public ResponseEntity<Page<Student>> studentsElectiveFilter(
-//            String elective,
-//            @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC) Pageable pageable) {
-//        Page<Student> studentPage = studentService.findFilterByElective(elective, pageable);
-//        return ResponseEntity.ok(studentPage);
-//    }
-
-
     @GetMapping("/v2")
     public String studentsReadPage(
             Model model,

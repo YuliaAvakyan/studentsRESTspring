@@ -3,18 +3,18 @@ package studentsrestproj.demo.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "student_mark_subject")
+@Table(name = "mark_subject", uniqueConstraints = { @UniqueConstraint( columnNames = { "mark_id", "subject_id" } ) } )
 public class StudentMarkSubject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "mark_id")
     private Marks mark;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
