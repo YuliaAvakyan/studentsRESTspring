@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import studentsrestproj.demo.model.Elective;
 import studentsrestproj.demo.model.Student;
-import studentsrestproj.demo.model.StudentMarkSubject;
 import studentsrestproj.demo.service.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 public class StudentController {
@@ -41,12 +42,7 @@ public class StudentController {
     //CREATE
     @GetMapping("/signup")
     public String showAddForm(Student student, Model model) {
-        List<Elective> electiveList = electiveService.readAll();
         model.addAttribute("student", student);
-        model.addAttribute("electivesList", electiveList);
-        model.addAttribute("subjects", subjectService.readAll());
-        model.addAttribute("marks", marksService.readAll());
-        model.addAttribute("mark_subj", new StudentMarkSubject());
         return "add-student";
     }
 
@@ -55,14 +51,11 @@ public class StudentController {
                              BindingResult result, Model model) {
 
         if (result.hasErrors()) {
-            model.addAttribute("electivesList", electiveService.readAll());
-            model.addAttribute("subjects", subjectService.readAll());
-            model.addAttribute("marks", marksService.readAll());
-            model.addAttribute("mark_subj", new StudentMarkSubject());
             return "add-student";
 
         }
         studentService.create(student);
+
         return "redirect:/students";
     }
 
@@ -72,9 +65,11 @@ public class StudentController {
     @GetMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
         Student student = studentService.read(id);
-        List<Elective> electiveList = electiveService.readAll();
+//        while (student.getStudentMarkSubjects().size() < subjectService.readAll().size()){
+//            student.getStudentMarkSubjects().add(new StudentMarkSubject());
+//        }
         model.addAttribute("student", student);
-        model.addAttribute("electives", electiveList);
+        model.addAttribute("electives", electiveService.readAll());
         model.addAttribute("subjects", subjectService.readAll());
         model.addAttribute("marks", marksService.readAll());
         return "update-student";
@@ -84,9 +79,7 @@ public class StudentController {
     public String updateStudent(@PathVariable("id") Long id, @Valid Student student,
                              BindingResult result, Model model) {
         if (result.hasErrors()) {
-//            student.setId(id);
-            List<Elective> electiveList = electiveService.readAll();
-            model.addAttribute("electives", electiveList);
+            model.addAttribute("electives", electiveService.readAll());
             model.addAttribute("subjects", subjectService.readAll());
             model.addAttribute("marks", marksService.readAll());
             return "update-student";
@@ -121,6 +114,14 @@ public class StudentController {
             Model model,
             @PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC, size = 5) Pageable pageable) {
         Page<Student> studentPage = studentService.findPaginated(pageable);
+
+        int totalPages = studentPage.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(0, totalPages - 1)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
         model.addAttribute("page", studentPage);
         return "studentsPage";
     }

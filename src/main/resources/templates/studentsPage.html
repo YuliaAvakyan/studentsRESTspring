@@ -34,8 +34,8 @@
                 <th>Email</th>
                 <th colspan="2">Actions</th>
             </tr>
-<!--                                <tr th:each="student : ${students}">-->
-            <tr th:each="student : ${page.content}">
+            <!--                                <tr th:each="student : ${students}">-->
+            <tr th:each="student : ${page}">
                 <td><a th:href="@{/student/{id}(id=${student.id})}" th:utext="${student.name}"></a></td>
                 <td th:text="${student.phone}"></td>
                 <td th:text="${student.email}"></td>
@@ -43,20 +43,16 @@
                 <td><a th:href="@{/delete/{id}(id=${student.id})}">delete</a></td>
             </tr>
         </table>
-        <!--            </div>-->
 
-        <div>
-            <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
-                <span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
-                <span th:unless="${page.number == i}">
+        <div th:each="i: ${pageNumbers}">
+            <span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
+            <span th:unless="${page.number == i}">
                         <a th:href="@{/students(page=${i},size=${page.size})}">[[${i}+1]]</a>
                     </span>
-            </th:block>
         </div>
 
 
     </div>
-<!--        </div>-->
 </div>
 
 </body>

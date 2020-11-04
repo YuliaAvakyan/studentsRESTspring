@@ -49,68 +49,7 @@
                 <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
             </div>
         </div>
-
-<!--        <div class="form-group row">-->
-<!--            <label class="col-sm-2 col-form-label">Electives</label>-->
-<!--            <div class="col-sm-5">-->
-<!--                <div class="form-check" th:each="elective : ${electivesList}">-->
-<!--                    <input class="form-check-input" type="checkbox" th:value="${elective.id}" th:field="*{electives}" id="elect">-->
-<!--                    <label class="form-check-label" for="elect" th:text="${elective.name}"></label>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-
-
-<!--        <div class="form-group row">-->
-<!--            <label class="col-sm-2 col-form-label">Marks</label>-->
-
-<!--&lt;!&ndash;FOR JS METHOD&ndash;&gt;-->
-<!--&lt;!&ndash;            <div class="form-group col-sm-5" id="selectList">&ndash;&gt;-->
-
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--&lt;!&ndash;            <a href="#" id="selectListBtn">Click</a>&ndash;&gt;-->
-
-<!--            <div class="form-group col-sm-5">-->
-<!--                <div class="form-row">-->
-<!--                    <div class="form-group col-sm-5">-->
-<!--                        <select class="form-control"  id="subjects" name="subjects" >-->
-<!--                            <option  th:each="subject : ${subjects}" th:text="${subject.name}" th:value="${subject.id}" th:field="${mark_subj.subject}"></option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                    <div class="form-group col-sm-2">-->
-<!--                        <select class="form-control"  id="marks" name="marks">-->
-<!--                            <option th:each="mark : ${marks}" th:text="${mark.mark}" th:value="${mark.id}" th:field="${mark_subj.mark}"></option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-
-<!--        </div>-->
     </form>
-<!--    <script th:inline="javascript">-->
-<!--        $('#selectListBtn').on('click', function(e) {-->
-<!--            e.preventDefault()-->
-<!--            $('#selectList').append(`-->
-<!--                 <div class="form-row">-->
-<!--                    <div class="form-group col-sm-5">-->
-<!--                        <select class="form-control"  name="subjects" >-->
-<!--                            <option  th:each="subject : /*[[${subjects}]]*/ th:text="${subject.name}" th:value="${subject.name}"></option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                    <div class="form-group col-sm-2">-->
-<!--                        <select class="form-control"  name="marks" th:field="${sms.mark.id}">-->
-<!--                            <option th:each="mark : ${marks}" th:text="${mark.mark}" th:value="${mark.mark}" ></option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            `)-->
-<!--        })-->
-<!--    </script>-->
-<!--    <script-->
-<!--            src="https://code.jquery.com/jquery-3.5.1.min.js"-->
-<!--            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="-->
-<!--            crossorigin="anonymous"></script>-->
 </div>
 </body>
 </html>

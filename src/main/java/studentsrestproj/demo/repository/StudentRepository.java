@@ -19,6 +19,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 //    List<Object[]> getSumMark();
 
     Page<Student> findByName(String name, Pageable pageable);
+    Student findByName(String name);
 
 
 //    @Query(value = "SELECT sum(m.mark) from Student s join s.marks m where s.id in " +

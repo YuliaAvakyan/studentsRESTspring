@@ -24,7 +24,7 @@ public class Student implements Serializable {
     private String phone;
 
     //    @OneToMany(cascade = {CascadeType.ALL})
-    @ManyToMany(cascade = {CascadeType.ALL}) //(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade ={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "student_mark_subject",
             joinColumns = @JoinColumn(name = "student_id"),

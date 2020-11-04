@@ -79,7 +79,12 @@ public class StudentServiceImpl implements StudentService {
         }
     }
 
-//    @Override
+    @Override
+    public Student findByName(String name) {
+        return studentRepository.findByName(name);
+    }
+
+    //    @Override
 //    public Double getAvgMark(Long id){
 ////        Student student = read(id);
 //        List<Integer> allMark = new ArrayList<>();
@@ -132,9 +137,4 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.findByName(name, pageable);
     }
 
-    @Override
-    public Page<Student> findFilterByElective(String elective, Pageable pageable) {
-
-        return null;
-    }
 }

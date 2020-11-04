@@ -15,6 +15,7 @@ public interface StudentService {
     Student read(Long id);
     Student update(Student student, Long id);
     void delete(Long id);
+    Student findByName(String name);
 //    Double getAvgMark(Long id);
 //    List<Double> getAvgMarkForAll();
 //    List<Student> getStudentsWithMark(double m1, double m2);
@@ -22,6 +23,6 @@ public interface StudentService {
 //    List<Object[]> getSumMark();
     Page<Student> findPaginated(Pageable pageable);
     Page<Student> findFilterByName(String name, Pageable pageable);
-    Page<Student> findFilterByElective(String elective, Pageable pageable);
+//    Page<Student> findFilterByElective(String elective, Pageable pageable);
 
 }
