@@ -4,10 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import studentsrestproj.demo.model.Student;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 public interface StudentService {
     Student create(Student student);

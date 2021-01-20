@@ -1,9 +1,12 @@
 package studentsrestproj.demo.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import studentsrestproj.demo.events.StudentCreationEvent;
+import studentsrestproj.demo.events.StudentDeleteEvent;
 import studentsrestproj.demo.model.Student;
 import studentsrestproj.demo.model.StudentMarkSubject;
 import studentsrestproj.demo.repository.StudMarkSubjRepository;
@@ -17,11 +20,13 @@ public class StudentServiceImpl implements StudentService {
 
     private final StudentRepository studentRepository;
     private final StudMarkSubjRepository studMarkSubjRepository;
+    private ApplicationEventPublisher applicationEventPublisher;
 
     @Autowired
-    public StudentServiceImpl(StudentRepository studentRepository, StudMarkSubjRepository studMarkSubjRepository) {
+    public StudentServiceImpl(StudentRepository studentRepository, StudMarkSubjRepository studMarkSubjRepository, ApplicationEventPublisher applicationEventPublisher) {
         this.studentRepository = studentRepository;
         this.studMarkSubjRepository = studMarkSubjRepository;
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 
 
@@ -33,7 +38,11 @@ public class StudentServiceImpl implements StudentService {
                 ms.setId(newMs.getId());
             }
         }
-        return studentRepository.save(student);
+        Student newStudent = studentRepository.save(student);
+
+        StudentCreationEvent studentCreatEvent = new StudentCreationEvent(newStudent);
+        applicationEventPublisher.publishEvent(studentCreatEvent);
+        return newStudent;
     }
 
     @Override
@@ -76,7 +85,10 @@ public class StudentServiceImpl implements StudentService {
     public void delete(Long id) {
         if (studentRepository.existsById(id)) {
             studentRepository.deleteById(id);
+            StudentDeleteEvent studentDeleteEvent = new StudentDeleteEvent(id);
+            applicationEventPublisher.publishEvent(studentDeleteEvent);
         }
+
     }
 
     @Override
