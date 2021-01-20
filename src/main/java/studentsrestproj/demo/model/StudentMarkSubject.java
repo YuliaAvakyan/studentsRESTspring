@@ -1,10 +1,13 @@
 package studentsrestproj.demo.model;
 
+import org.hibernate.annotations.Proxy;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "mark_subject", uniqueConstraints = { @UniqueConstraint( columnNames = { "mark_id", "subject_id" } ) } )
-public class StudentMarkSubject {
+public class StudentMarkSubject implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
