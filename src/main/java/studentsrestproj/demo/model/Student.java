@@ -91,14 +91,4 @@ public class Student implements Serializable {
     public void setStudentMarkSubjects(List<StudentMarkSubject> studentMarkSubjects) {
         this.studentMarkSubjects = studentMarkSubjects;
     }
-
-    //    public void addMark(Marks mark) {
-//        marks.add(mark);
-//        mark.setStudent(this);
-//    }
-//
-//    public void removeMark(Marks mark) {
-//        marks.remove(mark);
-////        mark.setStudent(null);
-//    }
 }

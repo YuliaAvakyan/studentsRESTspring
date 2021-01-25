@@ -96,49 +96,6 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.findByName(name);
     }
 
-    //    @Override
-//    public Double getAvgMark(Long id){
-////        Student student = read(id);
-//        List<Integer> allMark = new ArrayList<>();
-////        for (Marks mark: student.getMarks()) {
-//        for (Marks mark: marksRepository.findByStudentId(id)) {
-//            allMark.add(mark.getMark());
-//        }
-//        return allMark.stream().mapToInt(val -> val).average().orElse(0.0);
-//    }
-
-//    @Override
-//    public List<Double> getAvgMarkForAll(){
-//        List<Student> students = studentRepository.findAll();
-//        List<Double> marks = new ArrayList<>();
-//        for (Student st: students){
-//            marks.add(getAvgMark(st.getId()));
-//        }
-//        return marks;
-//    }
-//    @Override
-//    public List<Student> getStudentsWithMark(double m1, double m2){
-//        List<Student> students = studentRepository.findAll();
-//        List<Student> studentList = new ArrayList<>();
-//        for (Student st: students){
-//            double avg = getAvgMark(st.getId());
-//            if(m1 <= avg && avg <= m2){
-//                studentList.add(st);
-//            }
-//        }
-//        return studentList;
-//    }
-
-//    @Override
-//    public List<Object[]> getMarksCount(){
-//        return (studentRepository.getCountMarks());
-//    }
-
-//    @Override
-//    public List<Object[]> getSumMark() {
-//        return studentRepository.getSumMark();
-//    }
-
     @Override
     public Page<Student> findPaginated(Pageable pageable) {
         return studentRepository.findAll(pageable);

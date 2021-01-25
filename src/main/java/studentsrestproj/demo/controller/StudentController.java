@@ -65,9 +65,6 @@ public class StudentController {
     @GetMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
         Student student = studentService.read(id);
-//        while (student.getStudentMarkSubjects().size() < subjectService.readAll().size()){
-//            student.getStudentMarkSubjects().add(new StudentMarkSubject());
-//        }
         model.addAttribute("student", student);
         model.addAttribute("electives", electiveService.readAll());
         model.addAttribute("subjects", subjectService.readAll());
@@ -100,15 +97,6 @@ public class StudentController {
         return "redirect:/students";
     }
 
-    //READ
-//    @GetMapping("/students")
-//    public String readAllStudents(Model model) {
-//        List<Student> list = studentService.readAll();
-//        model.addAttribute("students", list);
-//
-//        return "studentsPage";
-//    }
-
     @GetMapping("/students")
     public String readAllStudentsPaged(
             Model model,
@@ -132,8 +120,6 @@ public class StudentController {
         List<Elective> electiveList = student.getElectives();
         model.addAttribute("student", student);
         model.addAttribute("electives", electiveList);
-
-
         return "oneStudentPage";
     }
 
